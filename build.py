@@ -20,6 +20,7 @@
 Script to build Boost for RACE
 """
 
+import logging
 import os
 import race_ext_builder as builder
 
@@ -43,12 +44,14 @@ if __name__ == "__main__":
 
     source_dir = os.path.join(args.source_dir, f"boost_{args.version.replace('.', '_')}")
 
+    logging.root.info("Running bootstrap.sh")
     builder.execute(args, [
         "./bootstrap.sh",
         f"--prefix={args.install_dir}",
         "--with-libraries=headers,random,system,thread,filesystem,chrono,atomic,date_time,regex"
     ], cwd=source_dir)
 
+    logging.root.info("Running b2")
     if args.target == "linux-x86_64":
         builder.execute(args, [
             "./b2",
