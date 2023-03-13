@@ -11,20 +11,13 @@ permissions:
   packages: write
 
 jobs:
-  build-linux-x86_64:
+  build-boost:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Boost
         uses: actions/checkout@v3
-        with:
-          path: 'ext-boost'
 
-      - name: Checkout ext-builder
-        uses: actions/checkout@v3
+      - name: Build Linux x86_64
+        uses: ${{ github.repository_owner }}/build-ext-action@v1
         with:
-          repository: ${{ github.repository_owner }}/ext-builder
-          ref: 'initial-setup'
-          path: 'ext-builder'
-
-      - name: Build Boost
-        run: ./ext-builder/build.py ./ext-boost --image ghcr.io/tst-race/ext-builder:initial-setup --target linux-x86_64
+          target: linux-x86_64
