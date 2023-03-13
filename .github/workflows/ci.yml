@@ -21,3 +21,13 @@ jobs:
         uses: tst-race/build-ext-action@v1
         with:
           target: linux-x86_64
+
+      - name: Build Android x86_64
+        uses: tst-race/build-ext-action@v1
+        with:
+          target: android-x86_64
+
+      - name: Build Android arm64-v8a
+        uses: tst-race/build-ext-action@v1
+        with:
+          target: android-arm64-v8a
