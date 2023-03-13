@@ -71,8 +71,9 @@ if __name__ == "__main__":
         ], cwd=source_dir)
     if args.target == "android-x86_64":
         builder.copy(
+            args,
             os.path.join(args.code_dir, "android-user-x86_64-config.jam"),
-            os.path.join(args.source_dir, "user-config.jam"),
+            os.path.join(source_dir, "user-config.jam"),
         )
         builder.execute(args, [
             "./b2",
@@ -80,7 +81,7 @@ if __name__ == "__main__":
             args.num_threads,
             f"--prefix={args.install_dir}",
             f"--build-dir={args.build_dir}",
-            "--user-config=user-config.jam"
+            "--user-config=user-config.jam",
             "toolset=clang-android",
             "architecture=x86",
             "address-model=64",
@@ -92,8 +93,9 @@ if __name__ == "__main__":
         ], cwd=source_dir)
     if args.target == "android-arm64-v8a":
         builder.copy(
+            args,
             os.path.join(args.code_dir, "android-user-arm64-v8a-config.jam"),
-            os.path.join(args.source_dir, "user-config.jam"),
+            os.path.join(source_dir, "user-config.jam"),
         )
         builder.execute(args, [
             "./b2",
@@ -101,7 +103,7 @@ if __name__ == "__main__":
             args.num_threads,
             f"--prefix={args.install_dir}",
             f"--build-dir={args.build_dir}",
-            "--user-config=user-config.jam"
+            "--user-config=user-config.jam",
             "toolset=clang-android",
             "architecture=arm",
             "address-model=64",
