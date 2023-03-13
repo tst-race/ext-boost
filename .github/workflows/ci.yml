@@ -1,23 +1,29 @@
-name: Build Boost
-on: [push]
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    branches:
+      - 'main'
+
+permissions:
+  packages: write
+
 jobs:
   build-linux-x86_64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
+      - name: Checkout Boost
+        uses: actions/checkout@v3
         with:
-          path: '${{ runner.workspace }}/boost_*.tar.gz'
-          key: 'boost-1.73.0'
+          path: 'ext-boost'
 
-      - uses: egor-tensin/setup-clang@v1
+      - name: Checkout ext-builder
+        uses: actions/checkout@v3
         with:
-          version: 15
-          platform: x64
+          repository: ${{ github.repository_owner }}/ext-builder
+          path: 'ext-builder'
 
-      - uses: egor-tensin/build-boost@v1
-        with:
-          version: 1.73.0
-          libraries: headers random system thread filesystem chrono atomic date_time regex
-          toolset: clang
-          platform: x64
-          configuration: Release
+      - name: Build Boost
+        run: ./ext-builder/build.py ./ext-boost --image ghcr.io/tst-race/ext-builder:initial-setup --target linux-x86_64
