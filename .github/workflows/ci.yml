@@ -25,5 +25,8 @@ jobs:
           repository: ${{ github.repository_owner }}/ext-builder
           path: 'ext-builder'
 
+      - run: pwd
+      - run: ls
+
       - name: Build Boost
         run: ./ext-builder/build.py ./ext-boost --image ghcr.io/tst-race/ext-builder:initial-setup --target linux-x86_64
