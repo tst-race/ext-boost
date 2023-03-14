@@ -51,6 +51,12 @@ if __name__ == "__main__":
         "--with-libraries=headers,random,system,thread,filesystem,chrono,atomic,date_time,regex"
     ], cwd=source_dir)
 
+    builder.copy(
+        args,
+        os.path.join(args.code_dir, f"user-config-{args.target}.jam"),
+        os.path.join(source_dir, "user-config.jam"),
+    )
+
     logging.root.info("Running b2")
     if args.target == "linux-x86_64":
         builder.execute(args, [
@@ -68,16 +74,13 @@ if __name__ == "__main__":
             args.num_threads,
             f"--prefix={args.install_dir}",
             f"--build-dir={args.build_dir}",
+            "--user-config=user-config.jam",
+            "toolset=clang-arm",
             "architecture=arm",
             "address-model=64",
             "install",
         ], cwd=source_dir)
     if args.target == "android-x86_64":
-        builder.copy(
-            args,
-            os.path.join(args.code_dir, "android-user-x86_64-config.jam"),
-            os.path.join(source_dir, "user-config.jam"),
-        )
         builder.execute(args, [
             "./b2",
             "-j",
@@ -95,11 +98,6 @@ if __name__ == "__main__":
             "install",
         ], cwd=source_dir)
     if args.target == "android-arm64-v8a":
-        builder.copy(
-            args,
-            os.path.join(args.code_dir, "android-user-arm64-v8a-config.jam"),
-            os.path.join(source_dir, "user-config.jam"),
-        )
         builder.execute(args, [
             "./b2",
             "-j",

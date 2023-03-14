@@ -1,0 +1,4 @@
+using clang : x86_64
+: 
+clang++ -target x86_64-linux-gnu
+;
