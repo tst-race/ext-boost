@@ -31,3 +31,10 @@ jobs:
         uses: tst-race/build-ext-action@v1
         with:
           target: android-arm64-v8a
+
+      - name: Upload Build Artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: ext-cache/boost-*
