@@ -42,14 +42,20 @@ if __name__ == "__main__":
         extract="tar.gz",
     )
 
-    source_dir = os.path.join(args.source_dir, f"boost_{args.version.replace('.', '_')}")
+    source_dir = os.path.join(
+        args.source_dir, f"boost_{args.version.replace('.', '_')}"
+    )
 
     logging.root.info("Running bootstrap.sh")
-    builder.execute(args, [
-        "./bootstrap.sh",
-        f"--prefix={args.install_dir}",
-        "--with-libraries=headers,random,system,thread,filesystem,chrono,atomic,date_time,regex"
-    ], cwd=source_dir)
+    builder.execute(
+        args,
+        [
+            "./bootstrap.sh",
+            f"--prefix={args.install_dir}",
+            "--with-libraries=headers,random,system,thread,filesystem,chrono,atomic,date_time,regex",
+        ],
+        cwd=source_dir,
+    )
 
     builder.copy(
         args,
@@ -59,60 +65,76 @@ if __name__ == "__main__":
 
     logging.root.info("Running b2")
     if args.target == "linux-x86_64":
-        builder.execute(args, [
-            "./b2",
-            "-j",
-            args.num_threads,
-            f"--prefix={args.install_dir}",
-            f"--build-dir={args.build_dir}",
-            "install",
-        ], cwd=source_dir)
+        builder.execute(
+            args,
+            [
+                "./b2",
+                "-j",
+                args.num_threads,
+                f"--prefix={args.install_dir}",
+                f"--build-dir={args.build_dir}",
+                "install",
+            ],
+            cwd=source_dir,
+        )
     if args.target == "linux-arm64-v8a":
-        builder.execute(args, [
-            "./b2",
-            "-j",
-            args.num_threads,
-            f"--prefix={args.install_dir}",
-            f"--build-dir={args.build_dir}",
-            "--user-config=user-config.jam",
-            "toolset=clang-arm",
-            "architecture=arm",
-            "address-model=64",
-            "install",
-        ], cwd=source_dir)
+        builder.execute(
+            args,
+            [
+                "./b2",
+                "-j",
+                args.num_threads,
+                f"--prefix={args.install_dir}",
+                f"--build-dir={args.build_dir}",
+                "--user-config=user-config.jam",
+                "toolset=clang-arm",
+                "architecture=arm",
+                "address-model=64",
+                "install",
+            ],
+            cwd=source_dir,
+        )
     if args.target == "android-x86_64":
-        builder.execute(args, [
-            "./b2",
-            "-j",
-            args.num_threads,
-            f"--prefix={args.install_dir}",
-            f"--build-dir={args.build_dir}",
-            "--user-config=user-config.jam",
-            "toolset=clang-android",
-            "architecture=x86",
-            "address-model=64",
-            "variant=release",
-            "target-os=android",
-            "threading=multi",
-            "link=shared",
-            "install",
-        ], cwd=source_dir)
+        builder.execute(
+            args,
+            [
+                "./b2",
+                "-j",
+                args.num_threads,
+                f"--prefix={args.install_dir}",
+                f"--build-dir={args.build_dir}",
+                "--user-config=user-config.jam",
+                "toolset=clang-android",
+                "architecture=x86",
+                "address-model=64",
+                "variant=release",
+                "target-os=android",
+                "threading=multi",
+                "link=shared",
+                "install",
+            ],
+            cwd=source_dir,
+        )
     if args.target == "android-arm64-v8a":
-        builder.execute(args, [
-            "./b2",
-            "-j",
-            args.num_threads,
-            f"--prefix={args.install_dir}",
-            f"--build-dir={args.build_dir}",
-            "--user-config=user-config.jam",
-            "toolset=clang-android",
-            "architecture=arm",
-            "address-model=64",
-            "variant=release",
-            "target-os=android",
-            "threading=multi",
-            "link=shared",
-            "install",
-        ], cwd=source_dir)
+        builder.execute(
+            args,
+            [
+                "./b2",
+                "-j",
+                args.num_threads,
+                f"--prefix={args.install_dir}",
+                f"--build-dir={args.build_dir}",
+                "--user-config=user-config.jam",
+                "toolset=clang-android",
+                "architecture=arm",
+                "address-model=64",
+                "variant=release",
+                "target-os=android",
+                "threading=multi",
+                "link=shared",
+                "install",
+            ],
+            cwd=source_dir,
+        )
 
     builder.create_package(args)
