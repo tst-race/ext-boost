@@ -1,0 +1,4 @@
+using clang : arm
+: 
+clang++ -target aarch64-linux-gnu
+;

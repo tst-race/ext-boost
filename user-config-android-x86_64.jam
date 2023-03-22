@@ -1,0 +1,8 @@
+import os ;
+using clang : android
+:
+"/opt/android/ndk/default/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android29-clang++"
+:
+<archiver>/opt/android/ndk/default/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ar
+<ranlib>/opt/android/ndk/default/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android-ranlib
+;
