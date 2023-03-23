@@ -1,6 +1,7 @@
 # Boost for RACE
 
-This repo provides scripts to custom-build the Boost library for RACE.
+This repo provides scripts to custom-build the
+[Boost library](https://boost.org) for RACE.
 
 ## License
 
@@ -14,7 +15,7 @@ Boost has no dependencies on any custom-built libraries.
 
 ## How To Build
 
-The ext-builder image is used to build Boost.
+The [ext-builder](https://github.com/tst-race/ext-builder) image is used to build Boost.
 
 ```
 git clone https://github.com/tst-race/ext-builder.git
