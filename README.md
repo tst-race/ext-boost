@@ -5,7 +5,7 @@ This repo provides scripts to custom-build the
 
 ## License
 
-The Boost library is licensed by the Boost Software License 1.0.
+The Boost library is licensed under the Boost Software License 1.0.
 
 Only the build scripts in this repo are licensed under Apache 2.0.
 
@@ -15,7 +15,8 @@ Boost has no dependencies on any custom-built libraries.
 
 ## How To Build
 
-The [ext-builder](https://github.com/tst-race/ext-builder) image is used to build Boost.
+The [ext-builder](https://github.com/tst-race/ext-builder) image is used to
+build Boost.
 
 ```
 git clone https://github.com/tst-race/ext-builder.git
